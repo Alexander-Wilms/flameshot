@@ -200,6 +200,8 @@ RESOURCES += \
 unix:!macx {
     packaging {
         USRPATH = /usr
+    } else if flatpak {
+        USRPATH = /app
     } else {
         USRPATH = /usr/local
     }
