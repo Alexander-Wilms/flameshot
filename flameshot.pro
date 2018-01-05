@@ -200,22 +200,24 @@ RESOURCES += \
 unix:!macx {
     packaging {
         USRPATH = /usr
+    } else if flatpak {
+        USRPATH = /app
     } else {
         USRPATH = /usr/local
     }
 
     target.path = $${BASEDIR}$${USRPATH}/bin/
 
-    qmfile.path = $${BASEDIR}/usr/share/flameshot/translations/
+    qmfile.path = $${BASEDIR}$${USRPATH}/share/flameshot/translations/
     qmfile.files = $${TRANSLATIONS_FILES}
 
-    dbus.path = $${BASEDIR}/usr/share/dbus-1/interfaces/
+    dbus.path = $${BASEDIR}$${USRPATH}/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
     
-    icon.path = $${BASEDIR}$${USRPATH}/share/icons/
+    icon.path = $${BASEDIR}$${BASEDIR}$${USRPATH}/share/icons/
     icon.files = img/flameshot.png
 
-    completion.path = /usr/share/bash-completion/completions/
+    completion.path = $${BASEDIR}$${USRPATH}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot
 
     desktopentry.path = $${BASEDIR}$${USRPATH}/share/applications
@@ -227,7 +229,7 @@ unix:!macx {
     desktopentryconfig.path = $${BASEDIR}$${USRPATH}/share/applications
     desktopentryconfig.files = docs/desktopEntry/package/flameshot-config.desktop
 
-    servicedbus.path = $${BASEDIR}/usr/share/dbus-1/services/
+    servicedbus.path = $${BASEDIR}$${USRPATH}/share/dbus-1/services/
     packaging {
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
     } else {
